@@ -2,20 +2,16 @@
 
 PKG_MNGR="${PKG_MANAGER:-brew}"
 GITHUB_USERNAME="${GITHUB_USERNAME:-codingjester}"
+OS=`uname`
+
 
 # verify which package managers we support based on operating system
 # this could definitely be less chaotic neutral
 verify_package_managers() {
-  OS=`uname`
-  # asdf check
-  if [[ "$OS" == "Linux" ]];
+  # asdf check and coder check
+  if [[ "$OS" == "Linux" && -z ${CODER_WORKSPACE_NAME} ]];
   then
     # asdf for now bc of reasons
-    if ! command -v asdf &> /dev/null
-    then
-      echo "Linux detected but we only support asdf at this time."
-      exit 1
-    fi
     PKG_MNGR="asdf"
   elif [[ "$OS" == "Darwin" ]];
   then
@@ -69,7 +65,7 @@ brew_bootstrap() {
 # verify the packages
 verify_package_managers
 
-# install based on your poison
+# install based on your poison, this could be better
 if [[ "$PKG_MNGR" == "brew" ]];
 then
   brew_bootstrap
