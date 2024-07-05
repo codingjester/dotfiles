@@ -17,3 +17,6 @@ mactivate() {
 mdeactivate() {
   mamba deactivate
 }
+
+alias kctx="kubectx"
+alias k="kubectl"
