@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
+set -ex
 
 PKG_MNGR="${PKG_MANAGER:-brew}"
 GITHUB_USERNAME="${GITHUB_USERNAME:-codingjester}"
 OS=`uname`
 
-
 # verify which package managers we support based on operating system
 # this could definitely be less chaotic neutral
 verify_package_managers() {
   # asdf check and coder check
-  if [[ "$OS" == "Linux" && -z ${CODER_WORKSPACE_NAME} ]];
+  if [[ "$OS" == "Linux" && ! -z ${CODER_WORKSPACE_NAME} ]];
   then
     # asdf for now bc of reasons
     PKG_MNGR="asdf"
@@ -56,8 +56,7 @@ asdf_bootstrap() {
 
 # bootstrap brew
 brew_bootstrap() {
-  chezmoi_install
-  echo "oh yeah"
+  echo "would do things related to chezmoi and installing"
 }
 
 ## MAIN
@@ -74,6 +73,8 @@ then
   asdf_bootstrap
 fi
 
+# install tmux bootstrap
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # if it's a coder specific setup setup your git config
 if [[ ! -z ${CODER_OWNER_EMAIL} ]];
