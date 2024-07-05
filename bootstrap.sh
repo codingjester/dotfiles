@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -ex
 
 PKG_MNGR="${PKG_MANAGER:-brew}"
 GITHUB_USERNAME="${GITHUB_USERNAME:-codingjester}"
@@ -74,7 +73,10 @@ then
 fi
 
 # install tmux bootstrap
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+if [[ ! -d ~/.tmux/plugins/tpm ]];
+then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 # if it's a coder specific setup setup your git config
 if [[ ! -z ${CODER_OWNER_EMAIL} ]];
