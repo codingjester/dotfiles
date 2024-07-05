@@ -1,0 +1,19 @@
+# create new environments
+mce() {
+  mamba env create -n ${1} -f conda-recipe/environment.yml
+}
+
+# init our environemnt
+minit() {
+  mamba init
+  source ~/.bashrc
+}
+
+# activate
+mactivate() {
+  mamba activate ${1}
+}
+
+mdeactivate() {
+  mamba deactivate
+}
