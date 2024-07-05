@@ -60,6 +60,9 @@ brew_bootstrap() {
 
 ## MAIN
 
+# install chezmoi
+chezmoi_install
+
 # verify the packages
 verify_package_managers
 
